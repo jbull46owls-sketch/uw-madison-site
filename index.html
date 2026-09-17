@@ -118,17 +118,19 @@
   /* Hero */
   .hero {
     padding: 5rem 0 4rem;
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 3rem;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 2.5rem;
+    text-align: center;
   }
   .hero-text {
     text-align: center;
+    max-width: 46ch;
+    margin-inline: auto;
   }
   .hero h1 {
-    font-size: clamp(2.4rem, 4.6vw, 3.6rem);
-    max-width: 15ch;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
     margin-inline: auto;
   }
   .hero h1 em {
@@ -137,7 +139,6 @@
   }
   .hero p.lede {
     margin: 1.5rem auto 0;
-    max-width: 46ch;
     font-size: 1.15rem;
     color: #3a3630;
   }
@@ -169,6 +170,12 @@
 
   .hero figure {
     margin: 0;
+    width: 100%;
+    max-width: 420px;
+  }
+  .hero figure svg {
+    width: 100%;
+    height: auto;
   }
   .hero figcaption {
     margin-top: 0.75rem;
@@ -284,7 +291,7 @@
   footer.site a:hover { color: var(--red); }
 
   @media (max-width: 860px) {
-    .hero, .isthmus-grid, .street-copy {
+    .isthmus-grid, .street-copy {
       grid-template-columns: 1fr;
     }
     .hero { padding-top: 3rem; }
@@ -329,18 +336,17 @@
       </div>
       <figure>
         <svg viewBox="0 0 420 420" role="img" aria-labelledby="hero-map-title">
-          <title id="hero-map-title">A simplified map of Madison's isthmus between Lake Mendota and Lake Monona</title>
-          <rect x="0" y="0" width="420" height="420" fill="none"/>
-          <path d="M0,60 C90,10 160,20 210,70 C260,120 240,190 180,200 C260,210 280,280 210,320 C160,360 90,350 0,300 Z" fill="var(--lake-light)"/>
-          <path d="M420,120 C340,80 300,110 280,160 C260,210 300,250 350,240 C300,260 280,320 330,360 C380,400 420,380 420,340 Z" fill="var(--lake-light)"/>
-          <path d="M210,70 C240,120 260,190 210,200 C260,210 300,260 280,320" fill="none" stroke="var(--lake)" stroke-width="1" stroke-dasharray="3 5" opacity="0.5"/>
-          <line x1="150" y1="120" x2="300" y2="270" stroke="var(--ink)" stroke-width="2"/>
-          <circle cx="170" cy="150" r="6" fill="var(--red)"/>
-          <text x="182" y="153" font-family="Source Sans 3, sans-serif" font-size="13" fill="var(--ink)">Campus</text>
-          <circle cx="270" cy="240" r="5" fill="var(--ink)"/>
-          <text x="282" y="243" font-family="Source Sans 3, sans-serif" font-size="13" fill="var(--ink)">Capitol</text>
-          <text x="60" y="90" font-family="Newsreader, serif" font-size="14" fill="var(--lake)">Lake Mendota</text>
-          <text x="330" y="360" font-family="Newsreader, serif" font-size="14" fill="var(--lake)">Lake Monona</text>
+          <title id="hero-map-title">A simplified map of Madison's isthmus, showing Lake Mendota (much larger, to the north) and Lake Monona (smaller, to the south)</title>
+          <path d="M0,40 C90,-15 210,-10 270,50 C315,95 310,150 255,175 C300,195 300,245 255,265 C205,290 145,270 130,225 C80,240 30,220 10,170 C-15,115 -25,90 0,40 Z" fill="var(--lake-light)"/>
+          <path d="M310,255 C350,225 395,245 405,285 C415,325 385,355 345,348 C312,342 295,315 305,288 C308,275 300,265 310,255 Z" fill="var(--lake-light)"/>
+          <path d="M300,270 C315,285 322,295 330,300" fill="none" stroke="var(--lake)" stroke-width="1" stroke-dasharray="3 5" opacity="0.5"/>
+          <line x1="245" y1="195" x2="300" y2="270" stroke="var(--ink)" stroke-width="2"/>
+          <circle cx="245" cy="195" r="6" fill="var(--red)"/>
+          <text x="257" y="198" font-family="Source Sans 3, sans-serif" font-size="13" fill="var(--ink)">Campus</text>
+          <circle cx="300" cy="270" r="5" fill="var(--ink)"/>
+          <text x="312" y="273" font-family="Source Sans 3, sans-serif" font-size="13" fill="var(--ink)">Capitol</text>
+          <text x="30" y="70" font-family="Newsreader, serif" font-size="16" fill="var(--lake)">Lake Mendota</text>
+          <text x="322" y="325" font-family="Newsreader, serif" font-size="13" fill="var(--lake)">Lake Monona</text>
         </svg>
         <figcaption>The isthmus, drawn to make the point &mdash; not to scale.</figcaption>
       </figure>
@@ -370,13 +376,13 @@
         </div>
         <figure class="map-figure reveal" aria-hidden="true">
           <svg viewBox="0 0 400 300">
-            <rect width="400" height="300" fill="none"/>
-            <path d="M0,40 C60,0 130,10 170,60 C210,110 190,160 140,170 C190,190 210,240 160,270 C110,300 40,280 0,240 Z" fill="var(--lake-light)"/>
-            <path d="M400,90 C330,60 290,90 280,130 C270,170 300,200 340,190 C300,210 290,250 330,280 C370,300 400,280 400,250 Z" fill="var(--lake-light)"/>
-            <path d="M170,60 Q190,130 140,170 Q210,200 160,270" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="150" cy="95" r="4" fill="var(--ink)"/>
-            <circle cx="160" cy="140" r="4" fill="var(--ink)"/>
-            <circle cx="180" cy="200" r="4" fill="var(--ink)"/>
+            <path d="M0,30 C80,-15 190,-10 240,45 C280,85 275,135 225,155 C260,170 260,205 220,220 C175,240 125,220 115,185 C70,195 25,175 10,135 C-10,90 -20,70 0,30 Z" fill="var(--lake-light)"/>
+            <path d="M280,210 C315,185 355,200 365,235 C375,270 350,295 315,288 C288,282 275,258 283,235 C286,225 278,218 280,210 Z" fill="var(--lake-light)"/>
+            <path d="M225,155 Q245,180 255,195 Q270,215 283,235" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M283,235 Q294,245 302,252" fill="none" stroke="var(--lake)" stroke-width="1" stroke-dasharray="3 5" opacity="0.5"/>
+            <circle cx="225" cy="155" r="4" fill="var(--ink)"/>
+            <circle cx="255" cy="195" r="4" fill="var(--ink)"/>
+            <circle cx="283" cy="235" r="4" fill="var(--ink)"/>
           </svg>
         </figure>
       </div>
