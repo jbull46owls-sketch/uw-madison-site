@@ -123,16 +123,20 @@
     gap: 3rem;
     align-items: center;
   }
+  .hero-text {
+    text-align: center;
+  }
   .hero h1 {
     font-size: clamp(2.4rem, 4.6vw, 3.6rem);
     max-width: 15ch;
+    margin-inline: auto;
   }
   .hero h1 em {
     font-style: normal;
     color: var(--red);
   }
   .hero p.lede {
-    margin: 1.5rem 0 0;
+    margin: 1.5rem auto 0;
     max-width: 46ch;
     font-size: 1.15rem;
     color: #3a3630;
@@ -140,6 +144,7 @@
   .hero .actions {
     margin-top: 2rem;
     display: flex;
+    justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
   }
@@ -309,7 +314,7 @@
 
   <section class="hero" id="top">
     <div class="wrap hero">
-      <div>
+      <div class="hero-text">
         <h1>Built on a sandbar<br>between <em>two lakes.</em></h1>
         <p class="lede">
           Lake Mendota to the north, Lake Monona to the south. The city of
