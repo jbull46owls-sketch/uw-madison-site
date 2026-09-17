@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UW&ndash;Madison &mdash; Built on a Sandbar Between Two Lakes</title>
+<meta name="description" content="A look at Madison, Wisconsin as a place: the isthmus between Lake Mendota and Lake Monona, State Street, and a campus that runs on four real seasons.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #c5050c;
+    --red-dark: #9b0000;
+    --ink: #1b1917;
+    --paper: #f7f4ee;
+    --paper-dim: #efe9df;
+    --lake: #1c4e73;
+    --lake-light: #cfe1e8;
+    --line: #d9d2c4;
+    --max: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 {
+    font-family: "Newsreader", Georgia, serif;
+    font-weight: 600;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  a { color: var(--lake); }
+  a:hover { color: var(--red); }
+
+  .skip-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.75rem 1.25rem;
+    z-index: 100;
+  }
+  .skip-link:focus { left: 1rem; top: 1rem; }
+
+  :focus-visible {
+    outline: 3px solid var(--lake);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 1.75rem;
+  }
+
+  /* Nav */
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(247, 244, 238, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  header.site .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+  }
+  .wordmark {
+    font-family: "Newsreader", Georgia, serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .wordmark span { color: var(--red); }
+  nav.primary ul {
+    list-style: none;
+    display: flex;
+    gap: 1.75rem;
+    margin: 0;
+    padding: 0;
+  }
+  nav.primary a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+  }
+  nav.primary a:hover { color: var(--red); border-bottom-color: var(--red); }
+
+  /* Hero */
+  .hero {
+    padding: 5rem 0 4rem;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 4.6vw, 3.6rem);
+    max-width: 15ch;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--red);
+  }
+  .hero p.lede {
+    margin: 1.5rem 0 0;
+    max-width: 46ch;
+    font-size: 1.15rem;
+    color: #3a3630;
+  }
+  .hero .actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.4rem;
+    border-radius: 3px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .btn.primary {
+    background: var(--red);
+    color: #fff;
+  }
+  .btn.primary:hover { background: var(--red-dark); color: #fff; }
+  .btn.ghost {
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+  }
+  .btn.ghost:hover { border-color: var(--red); color: var(--red); }
+
+  .hero figure {
+    margin: 0;
+  }
+  .hero figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: #6b665c;
+    text-align: center;
+  }
+
+  /* Section rhythm */
+  section {
+    padding: 4.5rem 0;
+    border-top: 1px solid var(--line);
+  }
+  section > .wrap > .kicker {
+    font-size: 0.85rem;
+    color: var(--lake);
+    font-weight: 600;
+    margin: 0 0 0.6rem;
+  }
+  section h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    max-width: 20ch;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Isthmus section */
+  .isthmus-grid {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 3.5rem;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  .isthmus-grid p { max-width: 50ch; color: #3a3630; }
+  .isthmus-grid p + p { margin-top: 1rem; }
+  .map-figure svg { width: 100%; height: auto; }
+
+  /* Seasons */
+  .seasons-list {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .season-row {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 1.75rem;
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .season-row:first-child { border-top: none; }
+  .season-icon {
+    width: 56px;
+    height: 56px;
+    color: var(--lake);
+  }
+  .season-row:nth-child(3) .season-icon,
+  .season-row:nth-child(4) .season-icon { color: var(--red); }
+  .season-row h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.4rem;
+  }
+  .season-row p { margin: 0; max-width: 62ch; color: #3a3630; }
+
+  /* State Street */
+  .street {
+    margin-top: 2.5rem;
+  }
+  .street-strip {
+    display: flex;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .street-strip span {
+    flex: 1;
+    height: 10px;
+  }
+  .street-copy {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  .street-copy p { margin: 0 0 1rem; color: #3a3630; max-width: 48ch; }
+  .street-copy p:last-child { margin-bottom: 0; }
+
+  /* Footer */
+  footer.site {
+    border-top: 1px solid var(--line);
+    padding: 3rem 0;
+    color: #6b665c;
+    font-size: 0.9rem;
+  }
+  footer.site .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer.site a { color: #6b665c; }
+  footer.site a:hover { color: var(--red); }
+
+  @media (max-width: 860px) {
+    .hero, .isthmus-grid, .street-copy {
+      grid-template-columns: 1fr;
+    }
+    .hero { padding-top: 3rem; }
+    nav.primary ul { gap: 1.1rem; }
+    nav.primary a { font-size: 0.85rem; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="wrap">
+    <a class="wordmark" href="#top">Madison<span>.</span></a>
+    <nav class="primary" aria-label="Primary">
+      <ul>
+        <li><a href="#isthmus">The Isthmus</a></li>
+        <li><a href="#seasons">Four Seasons</a></li>
+        <li><a href="#state-street">State Street</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="top">
+    <div class="wrap hero">
+      <div>
+        <h1>Built on a sandbar<br>between <em>two lakes.</em></h1>
+        <p class="lede">
+          Lake Mendota to the north, Lake Monona to the south. The city of
+          Madison and the University of Wisconsin sit on the four-mile strip
+          of land between them &mdash; an isthmus &mdash; and the campus is
+          shaped by the water on both sides of it.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="#isthmus">See the geography</a>
+          <a class="btn ghost" href="https://www.wisc.edu/" target="_blank" rel="noopener">wisc.edu</a>
+        </div>
+      </div>
+      <figure>
+        <svg viewBox="0 0 420 420" role="img" aria-labelledby="hero-map-title">
+          <title id="hero-map-title">A simplified map of Madison's isthmus between Lake Mendota and Lake Monona</title>
+          <rect x="0" y="0" width="420" height="420" fill="none"/>
+          <path d="M0,60 C90,10 160,20 210,70 C260,120 240,190 180,200 C260,210 280,280 210,320 C160,360 90,350 0,300 Z" fill="var(--lake-light)"/>
+          <path d="M420,120 C340,80 300,110 280,160 C260,210 300,250 350,240 C300,260 280,320 330,360 C380,400 420,380 420,340 Z" fill="var(--lake-light)"/>
+          <path d="M210,70 C240,120 260,190 210,200 C260,210 300,260 280,320" fill="none" stroke="var(--lake)" stroke-width="1" stroke-dasharray="3 5" opacity="0.5"/>
+          <line x1="150" y1="120" x2="300" y2="270" stroke="var(--ink)" stroke-width="2"/>
+          <circle cx="170" cy="150" r="6" fill="var(--red)"/>
+          <text x="182" y="153" font-family="Source Sans 3, sans-serif" font-size="13" fill="var(--ink)">Campus</text>
+          <circle cx="270" cy="240" r="5" fill="var(--ink)"/>
+          <text x="282" y="243" font-family="Source Sans 3, sans-serif" font-size="13" fill="var(--ink)">Capitol</text>
+          <text x="60" y="90" font-family="Newsreader, serif" font-size="14" fill="var(--lake)">Lake Mendota</text>
+          <text x="330" y="360" font-family="Newsreader, serif" font-size="14" fill="var(--lake)">Lake Monona</text>
+        </svg>
+        <figcaption>The isthmus, drawn to make the point &mdash; not to scale.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="isthmus">
+    <div class="wrap">
+      <p class="kicker">Geography</p>
+      <h2 class="reveal">Water on both sides of nearly every walk to class</h2>
+      <div class="isthmus-grid">
+        <div class="reveal">
+          <p>
+            Most college towns have a river, or a lake on the edge of things.
+            Madison has two lakes pressed against a strip of land narrow
+            enough to bike across in fifteen minutes. Bascom Hill looks down
+            toward Lake Mendota; walk the other direction from the Capitol
+            and you're at Lake Monona in ten minutes.
+          </p>
+          <p>
+            The university's oldest buildings line Mendota's shore because
+            the lake was the reason the site was chosen in 1848. Nothing
+            about that has changed &mdash; the Memorial Union Terrace still
+            sits right at the waterline, and student sailboats still launch
+            a few hundred feet from the library.
+          </p>
+        </div>
+        <figure class="map-figure reveal" aria-hidden="true">
+          <svg viewBox="0 0 400 300">
+            <rect width="400" height="300" fill="none"/>
+            <path d="M0,40 C60,0 130,10 170,60 C210,110 190,160 140,170 C190,190 210,240 160,270 C110,300 40,280 0,240 Z" fill="var(--lake-light)"/>
+            <path d="M400,90 C330,60 290,90 280,130 C270,170 300,200 340,190 C300,210 290,250 330,280 C370,300 400,280 400,250 Z" fill="var(--lake-light)"/>
+            <path d="M170,60 Q190,130 140,170 Q210,200 160,270" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="150" cy="95" r="4" fill="var(--ink)"/>
+            <circle cx="160" cy="140" r="4" fill="var(--ink)"/>
+            <circle cx="180" cy="200" r="4" fill="var(--ink)"/>
+          </svg>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="seasons">
+    <div class="wrap">
+      <p class="kicker">Living here</p>
+      <h2 class="reveal">A campus that actually has four seasons</h2>
+      <div class="seasons-list">
+
+        <div class="season-row reveal">
+          <svg class="season-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M24 6c4 6 4 10 0 16-4-6-4-10 0-16Z"/>
+            <path d="M24 22c6 3 9 7 9 13-6 1-10-1-13-6"/>
+            <path d="M24 22c-6 3-9 7-9 13 6 1 10-1 13-6"/>
+            <path d="M24 35v9"/>
+          </svg>
+          <div>
+            <h3>Fall &mdash; Bascom Hill turns, Camp Randall fills</h3>
+            <p>
+              The maples on Bascom Hill turn before the first home football
+              game, and on Saturdays the whole isthmus routes around Camp
+              Randall Stadium and 80,000 people in red.
+            </p>
+          </div>
+        </div>
+
+        <div class="season-row reveal">
+          <svg class="season-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <line x1="24" y1="6" x2="24" y2="42"/>
+            <line x1="9" y1="14" x2="39" y2="34"/>
+            <line x1="39" y1="14" x2="9" y2="34"/>
+          </svg>
+          <div>
+            <h3>Winter &mdash; the lake freezes and people walk on it</h3>
+            <p>
+              Once Lake Mendota's ice is thick enough, ice-fishing shanties
+              and pickup hockey games show up on the surface a short walk
+              from the dorms. The Terrace chairs get stacked; everyone moves
+              indoors to the Rathskeller until spring.
+            </p>
+          </div>
+        </div>
+
+        <div class="season-row reveal">
+          <svg class="season-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M24 42V18"/>
+            <path d="M24 18c-8-2-12-8-12-14 8 0 12 6 12 14Z"/>
+            <path d="M24 24c7-2 10-7 10-12-7 0-10 5-10 12Z"/>
+          </svg>
+          <div>
+            <h3>Spring &mdash; the Terrace reopens</h3>
+            <p>
+              The Memorial Union Terrace's sunburst chairs come back out the
+              first warm week, and the lake fills with sailboats again as
+              the student-run Hoofers sailing club reopens the docks.
+            </p>
+          </div>
+        </div>
+
+        <div class="season-row reveal">
+          <svg class="season-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <circle cx="24" cy="24" r="8"/>
+            <line x1="24" y1="4" x2="24" y2="10"/>
+            <line x1="24" y1="38" x2="24" y2="44"/>
+            <line x1="4" y1="24" x2="10" y2="24"/>
+            <line x1="38" y1="24" x2="44" y2="24"/>
+          </svg>
+          <div>
+            <h3>Summer &mdash; the Capitol Square becomes a market</h3>
+            <p>
+              Saturday mornings, the Dane County Farmers' Market wraps the
+              entire Capitol Square, and the Terrace runs concerts most
+              nights through August &mdash; both a few minutes from campus.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="state-street">
+    <div class="wrap">
+      <p class="kicker">Getting around</p>
+      <h2 class="reveal">Half a mile, no car required</h2>
+      <div class="street">
+        <div class="street-strip" aria-hidden="true">
+          <span style="background: var(--red);"></span>
+          <span style="background: var(--ink);"></span>
+          <span style="background: var(--lake);"></span>
+          <span style="background: var(--paper-dim); border-right: 1px solid var(--line);"></span>
+        </div>
+        <div class="street-copy">
+          <p class="reveal">
+            State Street runs in a straight, closed-to-cars line from the
+            steps of the Capitol to the steps of Bascom Hall. It's the
+            spine of the city: restaurants, the Wisconsin Union, music
+            venues, and the used bookstores students actually use, all
+            inside a fifteen-minute walk.
+          </p>
+          <p class="reveal">
+            Most students never need a car for four years &mdash; class,
+            groceries, the lake, and downtown are all reachable on foot or
+            by bike, which is unusual for a campus this size.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>Class project about Madison, Wisconsin &mdash; not an official UW&ndash;Madison site.</span>
+    <a href="https://www.wisc.edu/" target="_blank" rel="noopener">wisc.edu</a>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var items = document.querySelectorAll('.reveal');
+    if (prefersReduced || !('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function (el) { observer.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
